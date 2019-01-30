@@ -42,17 +42,45 @@ describe("Control test", () => {
 });
 
 // Button Events
-// describe("Contols button tests", () => {
-//   it("renders open gate when close gate button clicked", () => {
-//     const { getByText } = render(<Controls />);
+describe("Contols button tests", () => {
+  it("renders closed gate clicked", () => {
+    const { getByText } = render(<Controls />);
 
-//     const button = getByText(/close gate/i);
+    getByText(/close gate/i);
+  });
 
-//     fireEvent.click(button);
+  it("renders lock gate clicked", () => {
+    const { getByText } = render(<Controls />);
 
-//     getByText(/open gate/i);
-//   });
-// });
+    getByText(/lock gate/i);
+  });
+
+  it("renders open gate clicked", () => {
+    const { getByText } = render(<Controls closed={true} />);
+
+    getByText(/open gate/i);
+  });
+
+  it("renders unlock gate clicked", () => {
+    const { getByText } = render(<Controls locked={true} closed={true} />);
+
+    getByText(/unlock gate/i);
+  });
+
+  it("renders lock button to be disabled", () => {
+    const { getByText } = render(<Controls />);
+
+    const lockBtn = getByText(/lock gate/i);
+    expect(lockBtn).toBeDisabled();
+  });
+
+  it("renders close button to be disabled", () => {
+    const { getByText } = render(<Controls locked={true} closed={true} />);
+
+    const cBtn = getByText(/open gate/i);
+    expect(cBtn).toBeDisabled();
+  });
+});
 
 // describe("Contols button tests", () => {
 //   it("renders unlocked when locked gate button clicked", () => {
