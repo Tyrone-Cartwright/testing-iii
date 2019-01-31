@@ -1,10 +1,11 @@
 // Test away!
 import React from "react";
-import { render, fireEvent } from "react-testing-library";
+import { render, cleanup } from "react-testing-library";
 import "jest-dom/extend-expect";
 import "react-testing-library/cleanup-after-each";
 import Controls from "./Controls";
 
+afterEach(cleanup);
 describe("Control test", () => {
   it("should render lock or closed gate", () => {
     const { getByText } = render(<Controls locked={false} closed={false} />);

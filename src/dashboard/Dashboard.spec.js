@@ -1,23 +1,21 @@
 // Test away
-// import React from "react";
-// import { render } from "react-testing-library";
-// import "jest-dom/extend-expect";
-// import "react-testing-library/cleanup-after-each";
-// import Dashboard from "./Dashboard";
+import React from "react";
+import { render, cleanup } from "react-testing-library";
+import "jest-dom/extend-expect";
+import "react-testing-library/cleanup-after-each";
+import Dashboard from "./Dashboard";
 // import Controls from "../controls/Controls";
+afterEach(cleanup);
+describe("Display and Controls", () => {
+  it("should render <Display />", () => {
+    const { getByTestId } = render(<Dashboard />);
+    const display = getByTestId(/display/i);
+    expect(display).toBeInTheDocument();
+  });
 
-// describe("Display and Controls", () => {
-//   it("should render display", () => {
-//     const { getByTestId } = render(
-//       <Dashboard />
-//       // <Controls locked={true} closed={true} />
-//     );
-
-//     const display = getByTestId("display");
-//     const controls = getByTestId("controls");
-//     console.log(document.body.outerHTML);
-
-//     expect(display).toBeInTheDocument();
-//     expect(controls).toBeInTheDocument();
-//   });
-// });
+  it("should render <Controls />", () => {
+    const { getByTestId } = render(<Dashboard />);
+    const controls = getByTestId(/controls/i);
+    expect(controls).toBeInTheDocument();
+  });
+});
